@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FOOD DELIVERY— Food That Hits Different</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor"      id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar">
+  <div class="nav-brand" onclick="navigate('home')">
+    <div class="nav-logo">⚡</div>
+    <div class="nav-wordmark">FOOD DELIVERY</div>
+  </div>
+
+  <div class="nav-links">
+    <div class="nav-link active" data-page="home"       onclick="navigate('home')">Home</div>
+    <div class="nav-link"        data-page="menu"       onclick="navigate('menu')">Menu</div>
+    <div class="nav-link"        data-page="restaurant" onclick="navigate('restaurant')">Restaurants</div>
+    <div class="nav-link"        data-page="offers"     onclick="navigate('offers')">Offers</div>
+    <div class="nav-link"        data-page="about"      onclick="navigate('about')">About</div>
+    <div class="nav-link"        data-page="contact"    onclick="navigate('contact')">Contact</div>
+  </div>
+
+  <div class="nav-right">
+    <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">☀️</button>
+    <button class="icon-btn" onclick="navigate('profile')" title="Profile">👤</button>
+    <button class="cart-pill" onclick="navigate('cart')">
+      🛒 Cart
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <div class="hamburger" onclick="openMobMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-overlay" id="mobOverlay" onclick="closeMobMenu()"></div>
+<div class="mob-menu" id="mobMenu">
+  <div class="nav-link" data-page="home"       onclick="navigate('home')">🏠 Home</div>
+  <div class="nav-link" data-page="menu"       onclick="navigate('menu')">🍽️ Menu</div>
+  <div class="nav-link" data-page="restaurant" onclick="navigate('restaurant')">🏪 Restaurants</div>
+  <div class="nav-link" data-page="offers"     onclick="navigate('offers')">🏷️ Offers</div>
+  <div class="nav-link" data-page="tracking"   onclick="navigate('tracking')">📍 Track Order</div>
+  <div class="nav-link" data-page="about"      onclick="navigate('about')">ℹ️ About</div>
+  <div class="nav-link" data-page="contact"    onclick="navigate('contact')">📞 Contact</div>
+  <div class="nav-link" data-page="profile"    onclick="navigate('profile')">👤 Profile</div>
+  <div class="nav-link" data-page="login"      onclick="navigate('login')">🔐 Login</div>
+  <hr style="border-color:var(--line);margin:.5rem 0">
+  <div class="nav-link" onclick="toggleTheme()">🌓 Theme</div>
+</div>
+
+<!-- =====================================================================
+     HOME PAGE
+     ===================================================================== -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-canvas">
+      <div class="hero-circle hc1"></div>
+      <div class="hero-circle hc2"></div>
+      <div class="hero-circle hc3"></div>
+    </div>
+    <div class="hero-inner">
+      <!-- LEFT -->
+      <div>
+        <div class="hero-eyebrow">
+          <div class="pulse"></div>
+          ⚡ 30-min delivery — available now
+        </div>
+        <h1 class="hero-title">
+          FOOD
+          <span class="line-glow">THAT HITS</span>
+          <span class="line-outline">DIFFERENT</span>
+        </h1>
+        <p class="hero-desc">
+          500+ restaurants. 10,000+ dishes. Delivered hot and fresh
+          to your door in under 30 minutes — every single time.
+        </p>
+        <div class="hero-search-wrap">
+          <span>🔍</span>
+          <input type="text" placeholder="Search food, restaurants, cuisines…" id="heroSearchIn" oninput="document.getElementById('menuSearchIn')&&(document.getElementById('menuSearchIn').value=this.value)">
+          <button class="btn btn-saffron" onclick="navigate('menu')">Search</button>
+        </div>
+        <div class="hero-actions">
+          <button class="btn btn-saffron" onclick="navigate('menu')">🍽️ Order Now</button>
+          <button class="btn btn-ghost"   onclick="navigate('restaurant')">Explore Restaurants →</button>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-val">500<span>+</span></div><div class="stat-lbl">Restaurants</div></div>
+          <div><div class="stat-val">25<span>min</span></div><div class="stat-lbl">Avg Delivery</div></div>
+          <div><div class="stat-val">4.9<span>★</span></div><div class="stat-lbl">App Rating</div></div>
+        </div>
+      </div>
+
+      <!-- RIGHT — card stack -->
+      <div class="hero-right">
+        <div class="hero-card-stack">
+          <div class="hero-card hcard3"><div class="hcard-emoji">🌮</div></div>
+          <div class="hero-card hcard2"><div class="hcard-emoji">🍛</div></div>
+          <div class="hero-card hcard1">
+            <div class="hcard-emoji">🍕</div>
+            <div class="hcard-name">Margherita Royale</div>
+            <div class="hcard-rest">Pizza Pulse &nbsp;·&nbsp; Italian</div>
+            <div class="hcard-footer">
+              <div class="hcard-price">₹299</div>
+              <div class="hcard-rate">⭐ 4.8</div>
+              <div class="hcard-btn" onclick="addToCart(1)">+</div>
+            </div>
+          </div>
+
+          <div class="float-badge fb-a">
+            <span class="fb-dot" style="background:#16a34a"></span>
+            Free delivery today!
+          </div>
+          <div class="float-badge fb-b">
+            ⭐ Rated #1 food app
+          </div>
+          <div class="float-badge fb-c">
+            🔥 300+ orders / hr
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="section" style="padding-top:2rem">
+    <div class="container">
+      <div class="section-label label label-saffron">Browse Categories</div>
+      <h2 class="sec-title">What are you <span class="hi">craving?</span></h2>
+      <div class="cat-row">
+        <div class="cat-chip active" onclick="selectHomeCat(this)"><div class="cat-emoji">🍕</div><div class="cat-name">Pizza</div></div>
+        <div class="cat-chip"       onclick="selectHomeCat(this)"><div class="cat-emoji">🍔</div><div class="cat-name">Burgers</div></div>
+        <div class="cat-chip"       onclick="selectHomeCat(this)"><div class="cat-emoji">🍛</div><div class="cat-name">Biryani</div></div>
+        <div class="cat-chip"       onclick="selectHomeCat(this)"><div class="cat-emoji">🍰</div><div class="cat-name">Desserts</div></div>
+        <div class="cat-chip"       onclick="selectHomeCat(this)"><div class="cat-emoji">🥗</div><div class="cat-name">Healthy</div></div>
+        <div class="cat-chip"       onclick="selectHomeCat(this)"><div class="cat-emoji">🧃</div><div class="cat-name">Drinks</div></div>
+        <div class="cat-chip"       onclick="selectHomeCat(this)"><div class="cat-emoji">🍝</div><div class="cat-name">Pasta</div></div>
+        <div class="cat-chip"       onclick="selectHomeCat(this)"><div class="cat-emoji">🍣</div><div class="cat-name">Sushi</div></div>
+        <div class="cat-chip"       onclick="selectHomeCat(this)"><div class="cat-emoji">🌮</div><div class="cat-name">Mexican</div></div>
+        <div class="cat-chip"       onclick="selectHomeCat(this)"><div class="cat-emoji">🍜</div><div class="cat-name">Noodles</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POPULAR RESTAURANTS -->
+  <section class="section" style="padding-top:1.5rem">
+    <div class="container">
+      <div class="section-label label label-neon">Top Picks Near You</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem">
+        <h2 class="sec-title">Popular <span class="hi">Restaurants</span></h2>
+        <button class="btn btn-ghost btn-sm" onclick="navigate('menu')">See All →</button>
+      </div>
+      <div class="rest-grid" id="restGrid"></div>
+    </div>
+  </section>
+
+  <!-- TRENDING DISHES -->
+  <section class="section" style="padding-top:1.5rem">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem">
+        <div>
+          <div class="section-label label label-mag">🔥 Hot Right Now</div>
+          <h2 class="sec-title">Trending <span class="hi">Dishes</span></h2>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="navigate('menu')">Browse All →</button>
+      </div>
+      <div class="trend-wrap" id="trendWrap"></div>
+    </div>
+  </section>
+
+  <!-- OFFERS -->
+  <section class="section" style="padding-top:1.5rem">
+    <div class="container">
+      <div class="section-label label label-sky">Save More</div>
+      <h2 class="sec-title">Today's <span class="hi">Deals</span></h2>
+      <div class="offer-grid">
+        <div class="ocard ocard-1" onclick="navigate('offers')">
+          <div class="ocard-deco">🍕</div>
+          <div class="ocard-tag"><span class="label label-saffron">LIMITED TIME</span></div>
+          <div class="ocard-title">50% OFF<br>FIRST ORDER</div>
+          <div class="ocard-desc">Min order ₹199. New users only.</div>
+          <div class="ocard-code">🏷️ ZESTY50</div>
+        </div>
+        <div class="ocard ocard-2" onclick="navigate('offers')">
+          <div class="ocard-deco">🛵</div>
+          <div class="ocard-tag"><span class="label label-neon">WEEKENDS</span></div>
+          <div class="ocard-title">FREE<br>DELIVERY</div>
+          <div class="ocard-desc">On all orders above ₹299 this weekend.</div>
+          <div class="ocard-code">🏷️ FREERIDE</div>
+        </div>
+        <div class="ocard ocard-3" onclick="navigate('offers')">
+          <div class="ocard-deco">🎉</div>
+          <div class="ocard-tag"><span class="label label-sky">FESTIVAL</span></div>
+          <div class="ocard-title">₹100 OFF<br>₹499+ ORDERS</div>
+          <div class="ocard-desc">Order 2+ items and save big!</div>
+          <div class="ocard-code">🏷️ FEAST100</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section">
+    <div class="container" style="text-align:center">
+      <div class="section-label label label-saffron" style="margin:0 auto 1rem">Simple Steps</div>
+      <h2 class="sec-title">How <span class="hi">ZestyDrop</span> Works</h2>
+      <p class="sec-sub" style="margin:.75rem auto 0">From craving to doorstep in 3 effortless steps.</p>
+      <div class="steps-grid">
+        <div class="step reveal"><div class="step-num">1</div><div class="step-icon">🔍</div><div class="step-title">Choose Your Food</div><div class="step-desc">Browse 500+ restaurants & 10k+ dishes. Filter by cuisine, price, or rating.</div></div>
+        <div class="step reveal"><div class="step-num">2</div><div class="step-icon">💳</div><div class="step-title">Place Your Order</div><div class="step-desc">Add to cart, apply a promo code, and checkout securely in seconds.</div></div>
+        <div class="step reveal"><div class="step-num">3</div><div class="step-icon">🛵</div><div class="step-title">Fast Delivery</div><div class="step-desc">Sit back and track your order live as it races to your doorstep.</div></div>
+        <div class="step reveal"><div class="step-num">4</div><div class="step-icon">😋</div><div class="step-title">Enjoy &amp; Rate</div><div class="step-desc">Savour your meal and share your experience to help other food lovers.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section" style="padding-top:1.5rem">
+    <div class="container">
+      <div class="section-label label label-mag">User Love</div>
+      <h2 class="sec-title">What People <span class="hi">Say</span></h2>
+      <div class="testi-grid">
+        <div class="tescard reveal">
+          <div class="tescard-stars">★★★★★</div>
+          <div class="tescard-text">"ZestyDrop is the best food app I've used. Orders always arrive hot, tracking is flawless, and the variety is unreal. Completely replaced all my other delivery apps."</div>
+          <div class="tescard-author"><div class="tescard-av" style="background:linear-gradient(135deg,var(--saffron),var(--saffron2))">A</div><div><div class="tescard-name">Aarav Sharma</div><div class="tescard-city">New Delhi</div></div></div>
+        </div>
+        <div class="tescard reveal">
+          <div class="tescard-stars">★★★★★</div>
+          <div class="tescard-text">"Ordered from Spice Theory last week and it was phenomenal. The live tracking is so satisfying to watch. ZestyDrop has completely levelled up my lunch breaks."</div>
+          <div class="tescard-author"><div class="tescard-av" style="background:linear-gradient(135deg,#7c3aed,#a855f7)">P</div><div><div class="tescard-name">Priya Nair</div><div class="tescard-city">Mumbai</div></div></div>
+        </div>
+        <div class="tescard reveal">
+          <div class="tescard-stars">★★★★★</div>
+          <div class="tescard-text">"Insane variety, lightning-fast delivery, and the app is just gorgeous to use. The promo deals every week are a massive bonus. Highly recommend to everyone."</div>
+          <div class="tescard-author"><div class="tescard-av" style="background:linear-gradient(135deg,var(--sky),#4af08a)">R</div><div><div class="tescard-name">Rohan Mehta</div><div class="tescard-city">Bangalore</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP DOWNLOAD -->
+  <section class="section app-wrap">
+    <div class="container app-grid">
+      <div>
+        <div class="section-label label label-saffron">Get The App</div>
+        <h2 class="sec-title">Order Faster on the<br><span class="hi">ZestyDrop App</span></h2>
+        <p class="sec-sub">iOS & Android. App-only deals, faster checkout, real-time tracking, and exclusive restaurant drops.</p>
+        <div class="app-btns">
+          <div class="app-btn">
+            <div class="app-btn-icon">🍎</div>
+            <div><span class="app-btn-sub">Download on the</span><span class="app-btn-name">App Store</span></div>
+          </div>
+          <div class="app-btn">
+            <div class="app-btn-icon">▶️</div>
+            <div><span class="app-btn-sub">Get it on</span><span class="app-btn-name">Google Play</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="app-phones">
+        <div class="aphone"><div class="aphone-screen">🍔</div></div>
+        <div class="aphone"><div class="aphone-screen">🛒</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section" style="padding-top:1.5rem">
+    <div class="container">
+      <div class="newsletter-box reveal">
+        <div class="section-label label label-saffron" style="margin:0 auto .85rem">Stay in the Loop</div>
+        <h2 class="sec-title">Exclusive Deals<br>in Your <span class="hi">Inbox</span></h2>
+        <p class="sec-sub" style="margin:.6rem auto 0">Weekly offers, new restaurant alerts, and foodie inspo — zero spam.</p>
+        <div class="newsletter-form">
+          <input type="email" id="nlEmail" placeholder="your@email.com" style="border-radius:50px">
+          <button class="btn btn-saffron" onclick="subNewsletter()">Subscribe ⚡</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-about">
+        <div class="nav-brand" style="margin-bottom:.85rem">
+          <div class="nav-logo">⚡</div>
+          <div class="nav-wordmark">Zesty<span>Drop</span></div>
+        </div>
+        <p>Food that hits different. The tastiest restaurants delivered in minutes, right to your doorstep. Fresh, fast, and delicious — every single time.</p>
+        <div class="footer-socials">
+          <div class="fsoc">𝕏</div>
+          <div class="fsoc">f</div>
+          <div class="fsoc">in</div>
+          <div class="fsoc">📸</div>
+          <div class="fsoc">▶️</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a onclick="navigate('about')">About Us</a>
+        <a onclick="navigate('contact')">Contact</a>
+        <a>Careers</a>
+        <a>Press Kit</a>
+        <a>Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a onclick="navigate('menu')">Browse Menu</a>
+        <a onclick="navigate('offers')">Offers & Deals</a>
+        <a onclick="navigate('tracking')">Track Order</a>
+        <a onclick="navigate('profile')">My Account</a>
+        <a>Gift Cards</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a>Privacy Policy</a>
+        <a>Terms of Service</a>
+        <a>Cookie Policy</a>
+        <a>Refund Policy</a>
+        <a>Help Centre</a>
+      </div>
+    </div>
+    
+  </footer>
+</div>
+
+<!-- =====================================================================
+     MENU PAGE
+     ===================================================================== -->
+<div id="page-menu" class="page">
+  <div class="menu-header">
+    <div class="section-label label label-saffron" style="margin:0 auto .85rem">Explore</div>
+    <h1 class="sec-title" style="font-size:clamp(2.2rem,6vw,4.5rem)">
+      Discover <span class="hi">10,000+</span> Dishes
+    </h1>
+    <div class="menu-search-outer">
+      <span>🔍</span>
+      <input type="text" id="menuSearchIn" placeholder="Search dishes, restaurants…" oninput="onMenuSearch(this.value)">
+      <button class="btn btn-saffron btn-sm">Search</button>
+    </div>
+  </div>
+
+  <div class="cat-bar">
+    <button class="cbar-btn active" onclick="setMenuCat('all',this)">All</button>
+    <button class="cbar-btn" onclick="setMenuCat('pizza',this)">🍕 Pizza</button>
+    <button class="cbar-btn" onclick="setMenuCat('burger',this)">🍔 Burgers</button>
+    <button class="cbar-btn" onclick="setMenuCat('biryani',this)">🍛 Biryani</button>
+    <button class="cbar-btn" onclick="setMenuCat('pasta',this)">🍝 Pasta</button>
+    <button class="cbar-btn" onclick="setMenuCat('dessert',this)">🍰 Desserts</button>
+    <button class="cbar-btn" onclick="setMenuCat('drinks',this)">🧃 Drinks</button>
+    <button class="cbar-btn" onclick="setMenuCat('healthy',this)">🥗 Healthy</button>
+  </div>
+
+  <div class="menu-body">
+    <!-- FILTER PANEL -->
+    <div class="filter-panel">
+      <h3>🎛️ Filters</h3>
+      <div class="filter-block">
+        <h4>Cuisine</h4>
+        <div class="chips">
+          <div class="chip on" onclick="toggleChip(this)">Indian</div>
+          <div class="chip"    onclick="toggleChip(this)">Italian</div>
+          <div class="chip"    onclick="toggleChip(this)">Chinese</div>
+          <div class="chip"    onclick="toggleChip(this)">Mexican</div>
+          <div class="chip"    onclick="toggleChip(this)">Japanese</div>
+        </div>
+      </div>
+      <div class="filter-block">
+        <h4>Diet</h4>
+        <div class="chips">
+          <div class="chip" onclick="toggleChip(this)">🟢 Veg Only</div>
+          <div class="chip" onclick="toggleChip(this)">🔴 Non-Veg</div>
+          <div class="chip" onclick="toggleChip(this)">Vegan</div>
+        </div>
+      </div>
+      <div class="filter-block">
+        <h4>Max Price</h4>
+        <div class="range-row">
+          <input type="range" min="50" max="1000" value="500" oninput="this.nextElementSibling.textContent='₹'+this.value">
+          <div class="range-val">₹500</div>
+        </div>
+      </div>
+      <div class="filter-block">
+        <h4>Delivery Time</h4>
+        <div class="chips">
+          <div class="chip" onclick="toggleChip(this)">Under 20 min</div>
+          <div class="chip" onclick="toggleChip(this)">Under 30 min</div>
+          <div class="chip" onclick="toggleChip(this)">Under 45 min</div>
+        </div>
+      </div>
+      <div class="filter-block">
+        <h4>Rating</h4>
+        <div class="chips">
+          <div class="chip" onclick="toggleChip(this)">4.5+ ⭐</div>
+          <div class="chip" onclick="toggleChip(this)">4.0+ ⭐</div>
+        </div>
+      </div>
+      <button class="btn btn-saffron" style="width:100%;border-radius:12px" onclick="toast('ok','Filters applied! 🎯')">Apply Filters</button>
+    </div>
+
+    <!-- FOOD GRID -->
+    <div>
+      <div class="sort-row">
+        <strong id="resultCount" style="color:var(--ghost)">24 dishes found</strong>
+        <div class="sort-pills">
+          <button class="sort-pill on"  onclick="setSort('popular',this)">Popular</button>
+          <button class="sort-pill"     onclick="setSort('priceLow',this)">Price ↑</button>
+          <button class="sort-pill"     onclick="setSort('priceHigh',this)">Price ↓</button>
+          <button class="sort-pill"     onclick="setSort('rating',this)">Rating</button>
+          <button class="sort-pill"     onclick="setSort('time',this)">Fastest</button>
+        </div>
+      </div>
+      <div class="food-grid" id="foodGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================================
+     RESTAURANT PAGE
+     ===================================================================== -->
+<div id="page-restaurant" class="page">
+  <div class="rest-banner">
+    <div class="rest-banner-bg">
+      <span class="big-emoji">🌶️</span>
+      <div style="position:absolute;inset:0;background:linear-gradient(160deg,#1a0900,#4d1f00);"></div>
+    </div>
+    <div class="rest-banner-grad"></div>
+    <div class="rest-banner-content">
+      <h1>🌶️ Spice Theory</h1>
+      <div class="rest-banner-meta">
+        <span class="rmeta">⭐ 4.7 (2.1k ratings)</span>
+        <span class="rmeta">🕐 25–35 min</span>
+        <span class="rmeta">🛵 Free delivery</span>
+        <span class="rmeta">North Indian · Mughlai</span>
+        <span class="rbadge-open">● Open Now</span>
+      </div>
+      <p style="color:rgba(255,255,255,.55);font-size:.85rem;margin-top:.6rem;max-width:520px">
+        Authentic North Indian flavours crafted with the finest spices and freshest ingredients. A culinary journey you won't forget.
+      </p>
+    </div>
+  </div>
+
+  <div class="rest-layout">
+    <!-- MENU LIST -->
+    <div>
+      <div class="menu-section"><div class="menu-section-title">🥗 Starters</div><div id="starterItems"></div></div>
+      <div class="menu-section"><div class="menu-section-title">🍛 Main Course</div><div id="mainItems"></div></div>
+      <div class="menu-section"><div class="menu-section-title">🍰 Desserts</div><div id="dessertItems"></div></div>
+      <div class="menu-section"><div class="menu-section-title">🧃 Drinks</div><div id="drinkItems"></div></div>
+    </div>
+
+    <!-- STICKY CART -->
+    <div class="cart-stick">
+      <div class="cart-box">
+        <h3>🛒 Your Order</h3>
+        <div id="cartWidget">
+          <div class="cbox-empty">Your cart is empty. Add something delicious!</div>
+        </div>
+        <div id="cartWidgetTotal" style="display:none">
+          <div class="cbox-total">
+            <span>Subtotal</span>
+            <span id="cartWidgetSub">₹0</span>
+          </div>
+          <p style="font-size:.75rem;color:var(--ghost);margin:.35rem 0 1rem">+ ₹30 delivery + taxes</p>
+          <button class="btn btn-saffron" style="width:100%;border-radius:14px" onclick="navigate('cart')">Checkout →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================================
+     CART PAGE
+     ===================================================================== -->
+<div id="page-cart" class="page">
+  <div class="cart-layout">
+    <div>
+      <h2>🛒 Your Cart</h2>
+      <div id="cartItems"></div>
+      <div class="promo-row">
+        <input type="text" placeholder="Promo code (try ZESTY50)" id="promoInput">
+        <button class="btn btn-ghost btn-sm" onclick="applyPromo()" style="white-space:nowrap">Apply</button>
+      </div>
+      <div id="promoMsg"></div>
+    </div>
+    <div>
+      <div class="ord-sum">
+        <h3>Order Summary</h3>
+        <div class="sum-row"><span>Item Total</span><span id="sumItems">₹0</span></div>
+        <div class="sum-row"><span>Delivery Fee</span><span id="sumDel">₹30</span></div>
+        <div class="sum-row"><span>Taxes (5%)</span><span id="sumTax">₹0</span></div>
+        <div class="sum-row disc" id="sumDiscRow" style="display:none"><span>🏷️ Promo Discount</span><span id="sumDisc">-₹0</span></div>
+        <div class="sum-row total"><span>Grand Total</span><span id="sumTotal">₹30</span></div>
+        <div class="delivery-note">⏱️ Estimated delivery: <strong>25–35 mins</strong></div>
+        <div style="margin-bottom:1rem">
+          <label style="font-size:.78rem;font-weight:600;color:var(--ghost);display:block;margin-bottom:.4rem">Delivery Address</label>
+          <input type="text" placeholder="Enter your full delivery address">
+        </div>
+        <button class="btn btn-saffron" style="width:100%;border-radius:14px" onclick="placeOrder()">Place Order ⚡</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================================
+     TRACKING PAGE
+     ===================================================================== -->
+<div id="page-tracking" class="page">
+  <div class="track-page">
+    <div class="track-header">
+      <div class="section-label label label-neon" style="margin:0 auto .85rem">Order #ZD2025001</div>
+      <h1 class="sec-title" style="font-size:clamp(2rem,5vw,3.5rem)">Track Your <span class="hi">Order</span></h1>
+      <p style="color:var(--ghost);margin-top:.5rem">Estimated delivery: <strong style="color:var(--paper)">25 minutes</strong></p>
+    </div>
+
+    <div class="track-bar">
+      <div class="track-fill" style="width:60%"></div>
+      <div class="tstep"><div class="tdot done">✓</div><div class="tlabel">Order<br>Placed</div></div>
+      <div class="tstep"><div class="tdot done">✓</div><div class="tlabel">Confirmed<br>by Rest.</div></div>
+      <div class="tstep"><div class="tdot cur">🍳</div><div class="tlabel">Being<br>Prepared</div></div>
+      <div class="tstep"><div class="tdot">🛵</div><div class="tlabel">On<br>The Way</div></div>
+      <div class="tstep"><div class="tdot">🏠</div><div class="tlabel">Delivered</div></div>
+    </div>
+
+    <div class="driver-card">
+      <div class="drv-av">🧑‍🦱</div>
+      <div>
+        <div class="drv-name">Rajan Kumar</div>
+        <div class="drv-vehicle">Honda Activa · DL-04-XY-4521</div>
+        <div class="drv-rate">★★★★★ 4.9 (1,204 trips)</div>
+      </div>
+      <div class="drv-btns">
+        <button class="btn btn-ghost btn-sm" onclick="toast('inf','Calling Rajan… 📞')">📞 Call</button>
+        <button class="btn btn-card  btn-sm" onclick="toast('inf','Opening chat… 💬')">💬 Chat</button>
+      </div>
+    </div>
+
+    <div class="map-box">
+      <div class="map-grid-lines"></div>
+      <div class="map-pin">📍</div>
+      <div class="map-label">Rajan is 1.2 km away</div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r3);padding:1.5rem;margin-top:1.5rem">
+      <h3 style="font-family:var(--font-display);font-size:1.3rem;margin-bottom:1rem">Order Summary</h3>
+      <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--line);font-size:.875rem"><span>Butter Chicken</span><span>₹299</span></div>
+      <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--line);font-size:.875rem"><span>Garlic Naan × 2</span><span>₹80</span></div>
+      <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid var(--line);font-size:.875rem"><span>Mango Lassi</span><span>₹79</span></div>
+      <div style="display:flex;justify-content:space-between;padding:.85rem 0 0;font-weight:800;font-family:var(--font-display)"><span>Total Paid</span><span style="color:var(--saffron)">₹488</span></div>
+    </div>
+    <div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap">
+      <button class="btn btn-ghost" onclick="toast('inf','Calling restaurant… 📞')">📞 Call Restaurant</button>
+      <button class="btn btn-card"  onclick="toast('inf','Connecting to support… 🆘')">🆘 Get Help</button>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================================
+     OFFERS PAGE
+     ===================================================================== -->
+<div id="page-offers" class="page">
+  <div class="offers-page">
+    <div class="section-label label label-saffron">Deals &amp; Discounts</div>
+    <h1 class="sec-title" style="font-size:clamp(2rem,5vw,3.5rem)">Today's <span class="hi">Best Offers</span></h1>
+    <p class="sec-sub">Exclusive coupons, flash deals, and limited-time offers handpicked for you.</p>
+
+    <!-- FLASH DEALS -->
+    <div style="margin:2.5rem 0 1.5rem">
+      <div class="flash-row">
+        <span class="label label-red">⚡ Flash Sale</span>
+        <div class="ftimer">
+          <span style="color:var(--ghost);font-size:.8rem">Ends in:</span>
+          <div class="tbox" id="tH">02</div><span style="color:var(--ghost)">:</span>
+          <div class="tbox" id="tM">34</div><span style="color:var(--ghost)">:</span>
+          <div class="tbox" id="tS">59</div>
+        </div>
+      </div>
+      <div class="offer-grid">
+        <div class="ocard ocard-1" onclick="copyCoupon('FLASH30')"><div class="ocard-deco">⚡</div><div class="ocard-tag"><span class="label label-saffron">FLASH</span></div><div class="ocard-title">30% OFF<br>ALL BURGERS</div><div class="ocard-desc">Valid today only. Min ₹149.</div><div class="ocard-code">🏷️ FLASH30</div></div>
+        <div class="ocard ocard-2" onclick="copyCoupon('BOGO50')"><div class="ocard-deco">🍕</div><div class="ocard-tag"><span class="label label-neon">HOT DEAL</span></div><div class="ocard-title">BUY 1<br>GET 1 PIZZA</div><div class="ocard-desc">At participating restaurants.</div><div class="ocard-code">🏷️ BOGO50</div></div>
+        <div class="ocard ocard-3" onclick="copyCoupon('FEAST100')"><div class="ocard-deco">🎉</div><div class="ocard-tag"><span class="label label-sky">WEEKEND</span></div><div class="ocard-title">₹100 OFF<br>₹499+ ORDERS</div><div class="ocard-desc">This weekend only!</div><div class="ocard-code">🏷️ FEAST100</div></div>
+      </div>
+    </div>
+
+    <div class="section-label label label-saffron" style="margin:2rem 0 .75rem">All Coupons</div>
+    <div class="coupon-grid" id="couponGrid"></div>
+  </div>
+</div>
+
+<!-- =====================================================================
+     ABOUT PAGE
+     ===================================================================== -->
+<div id="page-about" class="page">
+  <div class="about-hero">
+    <div>
+      <div class="section-label label label-neon">Our Story</div>
+      <h1 class="sec-title" style="font-size:clamp(2rem,5vw,4rem)">Food That<br><span class="hi">Connects</span> People</h1>
+      <p class="sec-sub" style="margin-top:.75rem">ZestyDrop was born from a simple idea: everyone deserves access to amazing food, delivered with care and lightning speed. We're on a mission to make every meal memorable.</p>
+      <div class="hero-stats" style="margin-top:2rem">
+        <div><div class="stat-val">500<span>+</span></div><div class="stat-lbl">Restaurants</div></div>
+        <div><div class="stat-val">50k<span>+</span></div><div class="stat-lbl">Happy Users</div></div>
+        <div><div class="stat-val">100<span>+</span></div><div class="stat-lbl">Cities</div></div>
+      </div>
+      <button class="btn btn-saffron" style="margin-top:2rem" onclick="navigate('menu')">Order Now ⚡</button>
+    </div>
+    <div class="about-mosaic">
+      <div class="amosaic" style="background:linear-gradient(135deg,#2d1600,#5a2e00)">🍕</div>
+      <div class="amosaic" style="background:linear-gradient(135deg,#001a08,#004020)">🥗</div>
+      <div class="amosaic" style="background:linear-gradient(135deg,#1a0028,#3d0060)">🍰</div>
+      <div class="amosaic" style="background:linear-gradient(135deg,#001828,#004060)">🍜</div>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="section-label label label-saffron">Why Us</div>
+      <h2 class="sec-title">Our <span class="hi">Values</span></h2>
+      <div class="val-grid">
+        <div class="vcard"><div class="vcard-icon">⚡</div><div class="vcard-title">Lightning Fast</div><div class="vcard-desc">Average delivery under 30 minutes. We optimise every route to get food to you hot and fresh.</div></div>
+        <div class="vcard"><div class="vcard-icon">🌿</div><div class="vcard-title">Quality First</div><div class="vcard-desc">Every restaurant is vetted for quality, hygiene, and taste. We set the bar and keep it high.</div></div>
+        <div class="vcard"><div class="vcard-icon">💚</div><div class="vcard-title">Eco Friendly</div><div class="vcard-desc">Sustainable packaging, electric delivery vehicles, and carbon-offset partnerships.</div></div>
+        <div class="vcard"><div class="vcard-icon">🔒</div><div class="vcard-title">100% Secure</div><div class="vcard-desc">Your data and payments are always encrypted. Shop with complete confidence, always.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:1rem">
+    <div class="container">
+      <div class="section-label label label-mag">Meet The Team</div>
+      <h2 class="sec-title">The Humans <span class="hi">Behind</span> the App</h2>
+      <div class="team-grid">
+        <div class="tmcard"><div class="tmav" style="background:linear-gradient(135deg,var(--saffron),var(--saffron2))">A</div><div class="tm-name">Arjun Kapoor</div><div class="tm-role">CEO &amp; Co-Founder</div></div>
+        <div class="tmcard"><div class="tmav" style="background:linear-gradient(135deg,#7c3aed,#a855f7)">S</div><div class="tm-name">Sneha Reddy</div><div class="tm-role">CPO &amp; Co-Founder</div></div>
+        <div class="tmcard"><div class="tmav" style="background:linear-gradient(135deg,var(--sky),#4af08a)">R</div><div class="tm-name">Rahul Singh</div><div class="tm-role">CTO</div></div>
+        <div class="tmcard"><div class="tmav" style="background:linear-gradient(135deg,var(--magenta),#ff9ed2)">M</div><div class="tm-name">Meera Joshi</div><div class="tm-role">Head of Design</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- =====================================================================
+     CONTACT PAGE
+     ===================================================================== -->
+<div id="page-contact" class="page">
+  <div class="contact-page">
+    <div class="section-label label label-saffron">Get In Touch</div>
+    <h1 class="sec-title" style="font-size:clamp(2rem,5vw,3.8rem)">We'd <span class="hi">Love</span> to Hear<br>From You</h1>
+
+    <div class="contact-grid">
+      <div>
+        <div class="cinfo-item"><div class="cinfo-icon">📍</div><div class="cinfo-text"><h4>Our Office</h4><p>42 Foodtech Park, Cyber City, Delhi 110029</p></div></div>
+        <div class="cinfo-item"><div class="cinfo-icon">📞</div><div class="cinfo-text"><h4>Phone Support</h4><p>+91 1800-ZESTY-GO (Mon–Sat 9am–9pm)</p></div></div>
+        <div class="cinfo-item"><div class="cinfo-icon">📧</div><div class="cinfo-text"><h4>Email Us</h4><p>support@zestydrop.in</p></div></div>
+        <div class="cinfo-item"><div class="cinfo-icon">💬</div><div class="cinfo-text"><h4>Live Chat</h4><p>Chat with us 24/7 inside the app</p></div></div>
+        <div style="margin-top:1.5rem">
+          <h4 style="font-weight:700;font-size:.875rem;margin-bottom:.75rem">Follow Us</h4>
+          <div class="footer-socials"><div class="fsoc">𝕏</div><div class="fsoc">f</div><div class="fsoc">📸</div><div class="fsoc">in</div></div>
+        </div>
+      </div>
+      <div class="cform">
+        <h3>Send a Message</h3>
+        <div class="name-grid">
+          <div class="fgroup"><label>First Name</label><input type="text" placeholder="Arjun"></div>
+          <div class="fgroup"><label>Last Name</label><input type="text" placeholder="Sharma"></div>
+        </div>
+        <div class="fgroup"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+        <div class="fgroup"><label>Subject</label>
+          <select><option>Order Issue</option><option>Payment Problem</option><option>Restaurant Query</option><option>General Inquiry</option></select>
+        </div>
+        <div class="fgroup"><label>Message</label><textarea placeholder="Tell us how we can help…"></textarea></div>
+        <button class="btn btn-saffron" style="width:100%;border-radius:14px" onclick="toast('ok','Message sent! We\'ll reply within 24hrs 📬')">Send Message 🚀</button>
+      </div>
+    </div>
+
+    <div class="faq-list">
+      <h2>FAQs</h2>
+      <div class="faqitem" onclick="toggleFaq(this)"><div class="faqq"><span>How long does delivery take?</span><span class="faqico">+</span></div><div class="faqa">Most deliveries arrive within 25–35 minutes depending on distance, restaurant prep time, and current demand. You can track your order live in real-time.</div></div>
+      <div class="faqitem" onclick="toggleFaq(this)"><div class="faqq"><span>Can I cancel my order?</span><span class="faqico">+</span></div><div class="faqa">You can cancel within 2 minutes of placing at no charge. After that, cancellation may incur a fee as the restaurant will have started preparing your order.</div></div>
+      <div class="faqitem" onclick="toggleFaq(this)"><div class="faqq"><span>How do promo codes work?</span><span class="faqico">+</span></div><div class="faqa">Enter a valid promo code in the cart before checkout. Discounts are applied automatically. Each code has specific terms like minimum order value or cuisine restrictions.</div></div>
+      <div class="faqitem" onclick="toggleFaq(this)"><div class="faqq"><span>Is my payment information secure?</span><span class="faqico">+</span></div><div class="faqa">Absolutely. We use industry-standard SSL encryption and are PCI-DSS compliant. We never store your full card details on our servers.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================================
+     PROFILE PAGE
+     ===================================================================== -->
+<div id="page-profile" class="page">
+  <div class="profile-layout">
+    <div class="profile-side">
+      <div class="pro-card">
+        <div class="pro-av">👤</div>
+        <div class="pro-name">Aarav Sharma</div>
+        <div class="pro-email">aarav@example.com</div>
+        <div class="pro-badge"><span class="label label-neon">⭐ Gold Member</span></div>
+      </div>
+      <div class="pro-nav">
+        <div class="pro-nav-item on"  onclick="switchProfileTab('orders',this)"><span class="ni">📦</span>My Orders</div>
+        <div class="pro-nav-item"     onclick="switchProfileTab('addresses',this)"><span class="ni">📍</span>Addresses</div>
+        <div class="pro-nav-item"     onclick="switchProfileTab('favorites',this)"><span class="ni">❤️</span>Favourites</div>
+        <div class="pro-nav-item"     onclick="switchProfileTab('payments',this)"><span class="ni">💳</span>Payments</div>
+        <div class="pro-nav-item" style="color:var(--red)" onclick="toast('inf','Logged out. See you soon! 👋')"><span class="ni">🚪</span>Logout</div>
+      </div>
+    </div>
+    <div>
+      <!-- ORDERS -->
+      <div data-tab="orders">
+        <h2 style="font-family:var(--font-display);font-size:2rem;margin-bottom:1.5rem">My Orders</h2>
+        <div class="ord-item"><div class="ord-top"><div><div class="ord-id">Order #ZD2025001</div><div class="ord-date">2 Jan 2025</div></div><span class="ord-st st-del">Delivered</span></div><div class="ord-desc">Butter Chicken, Garlic Naan ×2, Mango Lassi — Spice Theory</div><div class="ord-foot"><div class="ord-price">₹488</div><button class="btn btn-ghost btn-sm" onclick="navigate('tracking')">Track</button></div></div>
+        <div class="ord-item"><div class="ord-top"><div><div class="ord-id">Order #ZD2024986</div><div class="ord-date">28 Dec 2024</div></div><span class="ord-st st-del">Delivered</span></div><div class="ord-desc">Double Cheeseburger, Loaded Fries, Coke — Burger Bliss</div><div class="ord-foot"><div class="ord-price">₹349</div><button class="btn btn-ghost btn-sm" onclick="toast('ok','Reordering! 🛒')">Reorder</button></div></div>
+        <div class="ord-item"><div class="ord-top"><div><div class="ord-id">Order #ZD2024972</div><div class="ord-date">22 Dec 2024</div></div><span class="ord-st st-can">Cancelled</span></div><div class="ord-desc">Veggie Pizza, Pasta Arrabbiata — Pizza Pulse</div><div class="ord-foot"><div class="ord-price">₹599</div><div style="font-size:.75rem;color:var(--ghost)">Refunded</div></div></div>
+      </div>
+      <!-- ADDRESSES -->
+      <div data-tab="addresses" style="display:none">
+        <h2 style="font-family:var(--font-display);font-size:2rem;margin-bottom:1.5rem">Saved Addresses</h2>
+        <div class="addr-item"><div class="addr-ico">🏠</div><div><strong style="font-size:.88rem">Home</strong><p style="font-size:.82rem;color:var(--ghost);margin-top:.2rem">42 Sector 21, Dwarka, New Delhi — 110077</p></div><button class="btn btn-card btn-sm" style="margin-left:auto">Edit</button></div>
+        <div class="addr-item"><div class="addr-ico">🏢</div><div><strong style="font-size:.88rem">Work</strong><p style="font-size:.82rem;color:var(--ghost);margin-top:.2rem">Cyber City, DLF Phase 2, Gurugram — 122002</p></div><button class="btn btn-card btn-sm" style="margin-left:auto">Edit</button></div>
+        <button class="btn btn-ghost" style="margin-top:1rem" onclick="toast('inf','Add address feature coming soon! 📍')">+ Add New Address</button>
+      </div>
+      <!-- FAVOURITES -->
+      <div data-tab="favorites" style="display:none">
+        <h2 style="font-family:var(--font-display);font-size:2rem;margin-bottom:1.5rem">Favourite Restaurants</h2>
+        <div class="rest-grid" id="favGrid"></div>
+      </div>
+      <!-- PAYMENTS -->
+      <div data-tab="payments" style="display:none">
+        <h2 style="font-family:var(--font-display);font-size:2rem;margin-bottom:1.5rem">Payment Methods</h2>
+        <div class="addr-item"><div class="addr-ico">💳</div><div><strong style="font-size:.88rem">Visa •••• 4242</strong><p style="font-size:.8rem;color:var(--ghost);margin-top:.2rem">Expires 09/26 · Default</p></div></div>
+        <div class="addr-item"><div class="addr-ico">🏦</div><div><strong style="font-size:.88rem">UPI — aarav@paytm</strong><p style="font-size:.8rem;color:var(--ghost);margin-top:.2rem">Linked &amp; Verified</p></div></div>
+        <button class="btn btn-ghost" style="margin-top:1rem" onclick="toast('inf','Payment feature coming soon! 💳')">+ Add Payment Method</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================================
+     LOGIN PAGE
+     ===================================================================== -->
+<div id="page-login" class="page">
+  <div class="auth-wrap">
+    <div class="auth-left">
+      <div class="auth-left-glow"></div>
+      <div class="auth-left-content">
+        <div class="auth-emoji-row">
+          <span>🍕</span><span>🍔</span><span>🌮</span><span>🍜</span>
+        </div>
+        <h2>Welcome to<br>ZestyDrop</h2>
+        <p>Your next favourite meal is just a few taps away. Sign in to track orders, save favourites, and unlock exclusive deals.</p>
+      </div>
+    </div>
+    <div class="auth-right">
+      <div class="auth-box">
+        <div class="auth-tabs">
+          <div class="auth-tab on"  onclick="switchAuth('login',this)">Login</div>
+          <div class="auth-tab"     onclick="switchAuth('signup',this)">Sign Up</div>
+        </div>
+        <!-- LOGIN -->
+        <div id="authLogin" class="auth-form-inner">
+          <h2>Welcome back 👋</h2>
+          <p>Login to continue ordering your favourites</p>
+          <div class="social-row">
+            <div class="soc-btn" onclick="toast('inf','Google login coming soon!')">🔍 Google</div>
+            <div class="soc-btn" onclick="toast('inf','Apple login coming soon!')">🍎 Apple</div>
+            <div class="soc-btn" onclick="toast('inf','Facebook login coming soon!')">f Facebook</div>
+          </div>
+          <div class="or-div">or continue with email</div>
+          <div class="fgroup"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+          <div class="fgroup"><label>Password</label>
+            <div class="pw-field"><input type="password" id="loginPw" placeholder="Your password"><span class="pw-eye" onclick="togglePw('loginPw')">👁️</span></div>
+          </div>
+          <div style="text-align:right;margin-bottom:1.25rem"><a style="font-size:.8rem;color:var(--saffron);cursor:pointer">Forgot password?</a></div>
+          <button class="btn btn-saffron" style="width:100%;border-radius:14px" onclick="toast('ok','Logged in! Welcome back 🎉');navigate('home')">Login ⚡</button>
+          <p style="text-align:center;margin-top:1rem;font-size:.85rem;color:var(--ghost)">New here? <a style="color:var(--saffron);cursor:pointer" onclick="switchAuth('signup',document.querySelectorAll('.auth-tab')[1])">Create an account</a></p>
+        </div>
+        <!-- SIGNUP -->
+        <div id="authSignup" class="auth-form-inner" style="display:none">
+          <h2>Join ZestyDrop 🚀</h2>
+          <p>Sign up and join 50,000+ food lovers</p>
+          <div class="social-row">
+            <div class="soc-btn" onclick="toast('inf','Google signup coming soon!')">🔍 Google</div>
+            <div class="soc-btn" onclick="toast('inf','Apple signup coming soon!')">🍎 Apple</div>
+          </div>
+          <div class="or-div">or sign up with email</div>
+          <div class="name-grid">
+            <div class="fgroup"><label>First Name</label><input type="text" placeholder="Arjun"></div>
+            <div class="fgroup"><label>Last Name</label><input type="text" placeholder="Sharma"></div>
+          </div>
+          <div class="fgroup"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+          <div class="fgroup"><label>Password</label>
+            <div class="pw-field"><input type="password" id="signupPw" placeholder="Create a password"><span class="pw-eye" onclick="togglePw('signupPw')">👁️</span></div>
+          </div>
+          <button class="btn btn-neon" style="width:100%;border-radius:14px" onclick="toast('ok','Account created! Welcome to ZestyDrop 🎉');navigate('home')">Create Account 🎉</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================================
+     FOOD MODAL
+     ===================================================================== -->
+<div class="modal-bg" id="foodModal" onclick="closeModalBg(event)">
+  <div class="modal-box">
+    <div class="modal-close" onclick="closeModal()">✕</div>
+    <div class="modal-img"><span id="modalEmoji">🍕</span></div>
+    <div class="modal-body">
+      <h3 id="modalName">Dish Name</h3>
+      <div class="modal-from" id="modalFrom">by Restaurant</div>
+      <div style="display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-bottom:.75rem">
+        <span id="modalDiet" class="fcard-diet diet-v">VEG</span>
+        <span id="modalRating" style="font-size:.85rem;color:var(--saffron2)"></span>
+        <span id="modalTime"   style="font-size:.82rem;color:var(--ghost)"></span>
+      </div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-foot">
+        <div class="qty-row">
+          <div class="qbtn" onclick="changeModalQty(-1)">−</div>
+          <div class="qnum" id="modalQtyNum">1</div>
+          <div class="qbtn" onclick="changeModalQty(1)">+</div>
+        </div>
+        <div class="modal-total" id="modalTotalP">₹0</div>
+        <button class="btn btn-saffron" onclick="addModalToCart()">Add to Cart 🛒</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST SHELF -->
+<div class="toast-shelf" id="toastShelf"></div>
+
+<!-- SCROLL TO TOP -->
+<div class="stt" id="stt" onclick="scrollTop()" title="Back to top">↑</div>
+
+<script src="app.js"></script>
+</body>
+</html>
